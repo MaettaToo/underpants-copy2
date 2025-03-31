@@ -2,7 +2,8 @@
 // other things. For more info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
-//functional library
+
+
 var _ = {};
 
 
@@ -28,7 +29,7 @@ var _ = {};
 _.identity = function(value){
     //return input value
     return value;
-}
+};
 
 
 /** _.typeOf
@@ -54,9 +55,38 @@ _.identity = function(value){
 //O: function returns type of value as a string
 //C: none
 //E: none 
-_.typeof = function(value){
-    
-}
+
+_.typeOf = function(value){
+    //create conditional stmt to determine type
+    if( typeof value === 'string'){
+        return 'string';
+    }
+    if(Array.isArray(value) === true){
+        return 'array';
+    }
+    if(typeof value === 'object' && Array.isArray(value) === false && value !== null && value instanceof Date === false){
+        return 'object';
+    } 
+    if( typeof value === 'undefined'){
+        return 'undefined';
+    }
+    if( typeof value === 'number'){
+        return 'number';
+    }
+    if( typeof value === 'boolean'){
+        return 'boolean';
+    }
+     if(value === null){
+        return 'null';
+     }
+     if( typeof value === 'function'){
+        return 'function';
+    }
+    if(value instanceof Date === true){
+        return 'date';
+    }
+
+};
 
 
 /** _.first
@@ -76,6 +106,11 @@ _.typeof = function(value){
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+//I: function takes an array and a number as param
+/*O: function returns empty array if array is not an array,If <number> is not given or not a number, return just the first element in <array>.
+// Otherwise, return the first <number> items of <array>
+//C: none
+//E: negative numbers, number is greater than array length
 
 
 /** _.last
