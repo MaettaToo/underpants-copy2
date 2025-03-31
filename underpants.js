@@ -2,7 +2,7 @@
 // other things. For more info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
-
+//functional library
 var _ = {};
 
 
@@ -20,6 +20,15 @@ var _ = {};
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
+//I: function takes unidentified value as param
+//O: function returns into value
+//C: none
+//E: none
+//init function with one param
+_.identity = function(value){
+    //return input value
+    return value;
+}
 
 
 /** _.typeOf
@@ -41,6 +50,13 @@ var _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
+//I: function takes one unidentified value 
+//O: function returns type of value as a string
+//C: none
+//E: none 
+_.typeof = function(value){
+    
+}
 
 
 /** _.first
@@ -157,6 +173,29 @@ var _ = {};
 * Extra Credit:
 *   use _.each in your implementation
 */
+//I: function takes two params an array and function
+//O: function returns a new array of elements which calling function = true
+//C: none
+//E: what if input function does not return true or false 
+_.filter = function(array, func){
+    //declare uotput array and initilize as empty
+    const output = [];
+        //init for loop to iterate over the input array
+        for(let i = 0; i < array.length; i++){
+            //create conditional stmt to determine if passing each element passed into the callback is  true or false
+            if(func(array[i], i, array)){
+                //push true items into array
+                output.push(array[i]);
+            }
+           
+        }//return output
+        return output;
+        console.log(_.filter(['alex', 'aaron','carter'], function(str){
+            return str(0);
+        }))
+                
+    
+    };
 
 
 /** _.reject
@@ -208,6 +247,31 @@ var _ = {};
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
+//I: function takes a collecion and a function as params
+//O: return new array containing results of invoking the callback on each item
+//C:none
+//E: make sure it works for objects
+_.map = function (collection, func){
+    // declare var and init as empty array
+    const output = [];
+    // determine if it is an array
+        if(Array.isArray(collection)){
+        // iterate over array
+            for(let i = 0; i < collection.length; i++){
+                //push the results from invoking the callback funtion into the output array
+                output.push(func(collection[i], i, collection));
+            }
+
+        } else{ 
+               // iterate ove the colection object
+                for(let key in collection){
+                    //push the results from invoking the callback funtion into the output array
+                    output.push(func(collection[key], key, collection));
+             }
+    }
+        return output;
+};
+
 
 
 /** _.pluck
