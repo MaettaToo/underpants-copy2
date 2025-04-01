@@ -107,10 +107,35 @@ _.typeOf = function(value){
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 //I: function takes an array and a number as param
-/*O: function returns empty array if array is not an array,If <number> is not given or not a number, return just the first element in <array>.
+//O: function returns empty array if array is not an array,If <number> is not given or not a number, return just the first element in <array>.
 // Otherwise, return the first <number> items of <array>
 //C: none
-//E: negative numbers, number is greater than array length
+//E: negative numbers, number is greater than array length 
+
+_.first = function(array, num){
+    // create conditional stmts to determine if array param  is empty
+    if(Array.isArray(array) === false){
+        return []; //return empty array
+    };
+    //if num is neg return empty array
+    if(typeof num === 'number' && num < 0){
+        return [];
+    };
+    //create conditional stmts to return first element in array if num is not a num or not given
+    if(typeof num !== 'number' && num === undefined){
+        return array[0];// return first index of the array
+    };
+        //else return the number of items that matches num
+    if(typeof num === 'number'){
+            return array.slice(0, num );
+        };
+
+    //if number is larger than array return the full array
+    if(num > array.length){
+        return array;
+    }
+     
+}
 
 
 /** _.last
@@ -130,6 +155,35 @@ _.typeOf = function(value){
 *   _.last(["a", "b", "c"], 1) -> "c"
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
+//I: function takes an array and a number as param
+//O: function returns empty array if array is not an array,If <number> is not given or not a number, return just the last element in <array>.
+// Otherwise, return the last <number> items of <array>
+//C: none
+//E: negative numbers, number is greater than array length 
+
+_.last = function(array, num){
+       // create conditional stmts to determine if array param  is empty
+       if(Array.isArray(array) === false){
+        return []; //return empty array
+    };
+    //if num is neg return empty array
+    if(typeof num === 'number' && num < 0){
+        return [];
+    };
+    //create conditional stmts to return last element in array if num is not a num or not given
+    if(typeof num !== 'number' && num === undefined){
+        return array[array.length - 1];// return last index of the array
+    };
+    //else return the number of items that matches num
+    if(typeof num === 'number'){
+            return array.slice(- num)
+        };
+
+    //if number is larger than array return the full array
+    if(num > array.length){
+        return array;
+    }
+}
 
 
 /** _.indexOf
