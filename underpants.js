@@ -390,12 +390,59 @@ _.map = function (collection, func){
 *   4) If <function> is not provided, return true if every element is truthy, otherwise return false
 * Edge Cases:
 *   1) what if <function> doesn't return a boolean
-*   2) What if <function> is not given?
+*   2) What if <function> is not given? evaluate results to see if the result is truthy or falsey
 * Examples:
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+//I: function takes two params collection(either object or array), function
+//O: return true if every element is true, return false if one element is false, return true or false if callback  is not provided or if function returns are not a boolean
+//C:none
+//E: callback function doesn't return a boolean,callback function is not given
+_.every = function(collection, func){
+// determine if collection is array or object
+    if(Array.isArray(collection)){
+        // nested if determine if there is a callback
+        if(func === undefined){
+            //iterate over collection 
+            for(let i = 0; i < collection.length; i++){
+                if(!collection[i]){ 
+                    return false;
+                }else{
+                return true;
+                }
+            }
+        
+        }else {// callback function is present iterate over collection 
+            for(let i = 0; i < collection.length; i++){
+                // create conditional stmt invoke callback function to see if results are true or false
+                 if(!func(collection[i], i, collection)){
+                    return false
+                }   
+                } return true;
+            
+        } 
+    } else{//collection is object
+        if(func === undefined){//determine if there is a callback was
+            //iterate over collection 
+                for(let key in collection){
+                    if(!collection[key]){ 
+                        return false;
+                    }else{
+                        return true;
+                }
+            }
 
+        }else {// callback function is present iterate over collection 
+            for(let key in collection){
+                // create conditional stmt invoke callback function to see if results are true or false
+                if(!func(collection[key], key , collection)){
+                    return false
+                }
+            } return true
+        }
+    }
+}
 
 /** _.some
 * Arguments:
@@ -417,6 +464,54 @@ _.map = function (collection, func){
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
+//I: function takes two params collection(either object or array), function
+//O: return true if one element is true, return false if every element is false, return true or false if callback  is not provided or if function returns are not a boolean
+//C:none
+//E: callback function doesn't return a boolean,callback function is not given
+_.some = function(collection, func){
+    // determine if collection is array or object
+        if(Array.isArray(collection)){
+            // nested if determine if there is a callback
+            if(func === undefined){
+                //iterate over collection 
+                for(let i = 0; i < collection.length; i++){
+                    if(collection[i]){ 
+                        return true;
+                    }else{
+                    return false;
+                    }
+                }
+            
+            }else {// callback function is present iterate over collection 
+                for(let i = 0; i < collection.length; i++){
+                    // create conditional stmt invoke callback function to see if results are true or false
+                     if(func(collection[i], i, collection)){
+                        return true;
+                    }   
+                    } return false;
+                
+            } 
+        } else{//collection is object
+            if(func === undefined){//determine if there is a callback was
+                //iterate over collection 
+                    for(let key in collection){
+                        if(collection[key]){ 
+                            return true;
+                        }else{
+                            return false;
+                    }
+                }
+    
+            }else {// callback function is present iterate over collection 
+                for(let key in collection){
+                    // create conditional stmt invoke callback function to see if results are true or false
+                    if(func(collection[key], key , collection)){
+                        return true
+                    }
+                } return false
+            }
+        }
+    }
 
 
 /** _.reduce
