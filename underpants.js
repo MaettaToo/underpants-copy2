@@ -426,8 +426,8 @@ for(let i = 0; i < array.length; i++){
     //push true items into array
 }
 //push subArray1 and push subArray1 to output
-output.push(subArray1);
-output.push(subArray2);
+output.push(subArray1, subArray2);
+
   //return output
  return output;
     };
