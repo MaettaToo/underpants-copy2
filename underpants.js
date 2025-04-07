@@ -201,7 +201,27 @@ _.last = function(array, num){
 *   _.indexOf(["a","b","c"], "c") -> 2
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
+//I: function takes two params an array and a value
+//O: return the index of array(number) that is the first occurance of value, return -1 if value is not in the array
+//C: Do not use [].indexOf()!
+//E: What if <array> has multiple occurances of val? What if <val> isn't in <array>?
 
+_.indexOf = (array, value) => {
+    // create conditional stmt to determine if the value is in the array
+    if(array.includes(value)){
+        //iterate over the array
+        for(let i = 0; i < array.length; i++){
+            //create conditional stmt to return the index of the first occurence of an element
+            if( value === array[i]){
+                return i; 
+        }
+    } 
+}else{ // if array does not include value return -1
+        return -1;
+}
+
+}
+   
 
 /** _.contains
 * Arguments:
@@ -217,7 +237,14 @@ _.last = function(array, num){
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
-
+// I: function takes an array and a value as the params
+//O: return true if input array contains input value, returns false if input array does not contain input value
+//C: must use ternary ? operator
+//E: no value given, or === is used 
+_.contains = (array, value) =>  {return  array.includes(value) ? true : false;};
+    //return the value of true or false based on if input value is included in the array
+   
+    
 
 /** _.each
 * Arguments:
@@ -234,6 +261,29 @@ _.last = function(array, num){
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
+//I: function takes a collection and a function as it's params
+//O: input function is called with each element or property
+//C: none
+//E: none
+// determine if collection is array or object
+_.each = (collection, func) => {
+    if(Array.isArray(collection)){
+        // iterate over array
+            for(let i = 0; i < collection.length; i++){
+                // call input function
+                func(collection[i], i, collection);
+            }
+
+        } else{ 
+               // iterate ove the colection object
+                for(let key in collection){
+                    //invoke input function
+                    func(collection[key], key, collection);
+             }
+    
+};
+
+}
 
 
 /** _.unique
@@ -245,8 +295,24 @@ _.last = function(array, num){
 * Examples:
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
-
-
+//I: function takes an array as param
+//O: return new array with duplicates from the input array removed
+//C: must use indexof
+//E:none
+_.unique = (array) => {
+    //init variable assigned to empty array
+    const output = [];
+ // iterate over the array to isolate elements
+ for( let i = 0; i < array.length; i++){
+    // set up conditional statement to compare indexes of array[i] to results of invoking function
+    if(_.indexOf(array, array[i]) === i){
+        // push element into the new arrat
+      output.push(array[i]);
+    }
+}
+//return output
+return output;
+}
 /** _.filter
 * Arguments:
 *   1) An array
@@ -267,7 +333,7 @@ _.last = function(array, num){
 //C: none
 //E: what if input function does not return true or false 
 _.filter = function(array, func){
-    //declare uotput array and initilize as empty
+    //declare output array and initilize as empty
     const output = [];
         //init for loop to iterate over the input array
         for(let i = 0; i < array.length; i++){
@@ -299,6 +365,29 @@ _.filter = function(array, func){
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
+//I: function takes two params an array and function
+//O: function returns a new array of elements which calling function = true
+//C: none
+//E: what if input function does not return true or false 
+_.filter = function(array, func){
+    //declare output array and initilize as empty
+    const output = [];
+        //init for loop to iterate over the input array
+        for(let i = 0; i < array.length; i++){
+            //create conditional stmt to determine if passing each element passed into the callback is  true or false
+            if(func(array[i], i, array)){
+                //push true items into array
+                output.push(array[i]);
+            }
+           
+        }//return output
+        return output;
+        console.log(_.filter(['alex', 'aaron','carter'], function(str){
+            return str(0);
+        }))
+                
+    
+    };
 
 
 /** _.partition
@@ -548,6 +637,10 @@ _.some = function(collection, func){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+// is the equivalent 
+//_.extend = (target,...objects) =>{
+
+//};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
