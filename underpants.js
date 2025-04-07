@@ -366,28 +366,27 @@ _.filter = function(array, func){
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 //I: function takes two params an array and function
-//O: function returns a new array of elements which calling function = true
+//O: function returns a new array of elements which calling function = false
 //C: none
 //E: what if input function does not return true or false 
-_.filter = function(array, func){
+_.reject = (array, func) => {
     //declare output array and initilize as empty
     const output = [];
         //init for loop to iterate over the input array
         for(let i = 0; i < array.length; i++){
             //create conditional stmt to determine if passing each element passed into the callback is  true or false
-            if(func(array[i], i, array)){
+            if(!func(array[i], i, array)){
                 //push true items into array
                 output.push(array[i]);
             }
            
         }//return output
         return output;
-        console.log(_.filter(['alex', 'aaron','carter'], function(str){
-            return str(0);
-        }))
+    
+        };
                 
     
-    };
+
 
 
 /** _.partition
@@ -408,7 +407,31 @@ _.filter = function(array, func){
 *   }); -> [[2,4],[1,3,5]]
 }
 */
+//I: function that takes an array and a function as its params
+//O: return an array made up of two sub arrays that has truthy values in one array and falsey values in the other array
+//C: none
+//E: This is going to return an array of arrays.
+_.partition = (array, func) => {
 
+// create the output array
+const output = []; 
+// create to subarray holders
+let subArray1 = [];
+let subArray2 = [];
+//declare output array and initilize as empty
+
+for(let i = 0; i < array.length; i++){
+    //create conditional stmt to determine if passing each element passed into the callback is  true or false
+    func(array[i], i, array) ? subArray1.push(array[i]) : subArray2.push(array[i])
+    //push true items into array
+}
+//push subArray1 and push subArray1 to output
+output.push(subArray1);
+output.push(subArray2);
+  //return output
+ return output;
+    };
+   
 
 /** _.map
 * Arguments:
