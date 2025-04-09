@@ -431,7 +431,12 @@ output.push(subArray1, subArray2);
   //return output
  return output;
     };
-   
+//if(_.filter(array, func) === true){
+    //subArray1.push(array);
+//} else{
+    //subArray2.push(array);
+//}
+//};   
 
 /** _.map
 * Arguments:
@@ -485,6 +490,18 @@ _.map = function (collection, func){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+//I: function takes an array of objects and a property as params
+//O: return an array contaning  the value of property for every element in array
+//C: must use _.map() in the implementation
+//E: none
+_.pluck = (array, prop) => 
+//create holder array
+const output = [];
+//map over the array to access each object
+//access the property push the value to the holder array
+//return the holder array 
+return output;
+
 
 
 /** _.every
