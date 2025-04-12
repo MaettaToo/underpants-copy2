@@ -680,6 +680,9 @@ _.some = function(collection, func){
 // is the equivalent 
 //_.extend = (target,...objects) =>{
 
+
+
+
 //};
 
 //////////////////////////////////////////////////////////////////////
