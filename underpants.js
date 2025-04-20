@@ -418,8 +418,8 @@ const output = [];
 // create to subarray holders
 let subArray1 = [];
 let subArray2 = [];
-//declare output array and initilize as empty
 
+// init for loop to iterate over  input array
 for(let i = 0; i < array.length; i++){
     //create conditional stmt to determine if passing each element passed into the callback is  true or false
     func(array[i], i, array) ? subArray1.push(array[i]) : subArray2.push(array[i])
@@ -430,13 +430,7 @@ output.push(subArray1, subArray2);
 
   //return output
  return output;
-    };
-//if(_.filter(array, func) === true){
-    //subArray1.push(array);
-//} else{
-    //subArray2.push(array);
-//}
-//};   
+};   
 
 /** _.map
 * Arguments:
@@ -491,17 +485,18 @@ _.map = function (collection, func){
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 //I: function takes an array of objects and a property as params
-//O: return an array contaning  the value of property for every element in array
+//O: return an array containing  the value of property for every element in array
 //C: must use _.map() in the implementation
 //E: none
-_.pluck = (array, prop) => 
-//create holder array
-const output = [];
-//map over the array to access each object
-//access the property push the value to the holder array
-//return the holder array 
-return output;
+_.pluck = (array, prop) => {
+//initiate map to iterate over array and return value of props 
+ const myPluck = _.map(array, function(curr){
+    return curr[prop];
+    })
 
+//return output;
+return myPluck;
+}
 
 
 /** _.every
@@ -661,6 +656,33 @@ _.some = function(collection, func){
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
+_.reduce = (array, func, seed) => {
+    //init output variable to hold results 
+    let output;
+    //conditional stmt to see if seed is present  
+    if (seed === undefined){
+        // if no seed  initial value is first value of array 
+        output = array[0]
+        //iterate over the array to invoke function
+        for(let i = 1; i < array.length; i++){
+         //reasign results of function to output variable
+            output = func(output, array[i], i);
+        }
+    // if seed is present  
+} else{
+    //if seed is present initial value is the seed 
+    output = seed;
+    //iterrate over the array invoking the function 
+    for(let i = 0; i < array.length; i++ ){
+        //reasign results of function to output variable
+        output = func( output, array[i], i);
+     }
+    }
+    //return rsults of  invoking function
+return output 
+}
+
+
 
 
 /** _.extend
@@ -678,12 +700,19 @@ _.some = function(collection, func){
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 // is the equivalent 
-//_.extend = (target,...objects) =>{
-
-
-
-
-//};
+_.extend = (target, ...objects) =>{
+    //I: function takes two or more params repp as objects
+    //O: return first input object with all of the fllowing objects copied to it in order
+    //C: none
+    //E: need to be in order that they were passed
+    //console.log(target);
+    //console.log(objects)
+    //use object assign to copy obj2 to ob1, use rest when for params 
+     let output = Object.assign(target, ...objects);
+    
+//return updated object   
+return output;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
